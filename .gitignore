@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+data/
+/PROJECT_DASHBOARD.md
+/PROJECT_OVERVIEW.md
+/RESEARCH.md
