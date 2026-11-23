@@ -7,8 +7,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "127.0.0.1:4000:8000"
     command: ["sh", "-c", "python manage.py migrate --noinput && exec python manage.py runserver 0.0.0.0:8000"]
   db:
     image: postgres:18.7-bookworm
@@ -23,6 +21,18 @@ services:
       interval: 5s
       timeout: 5s
       retries: 12
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:4000:5173"
+    depends_on:
+      - app
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+          initial_sync: true
 
 volumes:
   postgres_data:

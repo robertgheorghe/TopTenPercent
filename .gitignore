@@ -5,6 +5,8 @@ __pycache__/
 .env.*
 !.env.example
 data/
+node_modules/
+frontend/dist/
 /PROJECT_DASHBOARD.md
 /PROJECT_OVERVIEW.md
 /RESEARCH.md

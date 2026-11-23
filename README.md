@@ -7,10 +7,10 @@ Personal classic FPL analysis project. Official FPL endpoints are the agreed MVP
 Fixture scoring, gameweek aggregation, bounded collection and reconciliation have
 42 offline standard-library tests. The saved 2026/27 GW1–2 sample reconciled
 eight player-fixture records and eight player-gameweeks with zero diagnostics.
-The local API uses Django REST Framework and PostgreSQL in Docker Compose.
+Docker Compose runs React with Vite, Django REST Framework and PostgreSQL.
 The offline tools use a separate Python 3.12 `.venv`, which Git ignores.
 
-## Start the local API on Windows
+## Start the local app on Windows
 
 Start Docker Desktop with the Linux engine and open PowerShell in `D:\FPL`.
 If `.env` is missing, generate local credentials once and keep the file for later starts.
@@ -24,11 +24,14 @@ if (-not (Test-Path -LiteralPath .env)) {
 ```
 
 ```powershell
-docker compose up --build --wait
+docker compose up --build --watch
 ```
 
-Expect `{"database":"ok"}` at the [API health endpoint](http://localhost:4000/api/health/).
-Run `docker compose down` to stop the stack and keep the database volume.
+Open [localhost:4000](http://localhost:4000) and expect **PostgreSQL connected.**
+The [API health endpoint](http://localhost:4000/api/health/) returns `{"database":"ok"}`.
+Edits in `frontend/src/` update the page automatically. Rebuild after changing
+other frontend files. Press Ctrl+C to stop, then run `docker compose down`
+to remove the containers and keep the database volume.
 
 ## Offline commands (PowerShell, from the project directory)
 
